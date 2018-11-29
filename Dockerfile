@@ -33,6 +33,7 @@ RUN mkdir -p /opt/leproxy
 RUN mkdir -p /opt/entrypoint
 ADD ./scripts/bootstrap.sh /opt/entrypoint/bootstrap.sh
 ADD ./scripts/mapping.yml /opt/entrypoint/mapping.yml
+RUN chmod +x /opt/entrypoint/bootstrap.sh
 
 WORKDIR /opt/vault
 
