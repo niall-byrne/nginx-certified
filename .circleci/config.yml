@@ -6,5 +6,5 @@ jobs:
    steps:
      - checkout
      - run: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-     - run: docker build -f Dockerfile -t niallbyrne/leproxy-gc1:$CIRCLE_BRANCH .
-     - run: docker push niallbyrne/leproxy-gc1:$CIRCLE_BRANCH
+     - run: docker build -f Dockerfile -t niallbyrne/nginx-certified:$CIRCLE_BRANCH .
+     - run: docker push niallbyrne/nginx-certified:$CIRCLE_BRANCH

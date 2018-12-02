@@ -1,0 +1,24 @@
+# hide nginx version
+server_tokens off;
+
+# add nosniff header (https://www.owasp.org/index.php/List_of_useful_HTTP_headers)
+add_header X-Content-Type-Options nosniff;
+
+# protocols
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+# session
+ssl_session_cache shared:SSL:20m;
+ssl_session_timeout 60m;
+
+# ocsp stapling
+ssl_stapling on;
+ssl_stapling_verify on;
+resolver 8.8.4.4 8.8.8.8;
+
+# ciphers
+ssl_prefer_server_ciphers on;
+ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DHE+AES128:!ADH:!AECDH:!MD5;
+
+# Security Headers
+add_header Strict-Transport-Security "max-age=31536000" always;
