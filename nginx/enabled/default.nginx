@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name _;
+    server_name <<servername>>;
 
     access_log /dev/stdout;
     error_log /dev/stdout info;
@@ -12,7 +12,7 @@ server {
 server {
 
     listen   443;
-    server_name _;
+    server_name <<servername>>;
 
     keepalive_timeout 5;
 

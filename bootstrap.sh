@@ -37,6 +37,7 @@ PORT="${PROXY_PORT:-8000}"
 [[ ${PRODUCTION_ENVIRONMENT} -eq 0 ]] && DEHYDRATED_CA="https://acme-staging-v02.api.letsencrypt.org/directory"
 [[ ${PRODUCTION_ENVIRONMENT} -eq 1 ]] && DEHYDRATED_CA="https://acme-v02.api.letsencrypt.org/directory"
 sed -i.bak "s/<<port>>/${PORT}/g" /etc/nginx/sites-enabled/default.conf
+sed -i.bak "s/<<servername>>/${SUBDOMAIN}.${HOSTED_ZONE}/g" /etc/nginx/sites-enabled/default.conf
 rm /etc/nginx/sites-enabled/default.conf.bak
 
 echo "BOOTSTRAP: Let's Encrypt Endpoint set to ${DEHYDRATED_CA} ..."
