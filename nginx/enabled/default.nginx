@@ -1,7 +1,5 @@
 server {
-    listen 80 default_server;
-	listen [::]:80 default_server;
-
+    listen 80;
     server_name _;
 
     access_log /dev/stdout;
@@ -22,7 +20,7 @@ server {
     error_log /dev/stdout info;
 
     ssl    on;
-    ssl_certificate         /etc/pki/fullchain.crt;
+    ssl_certificate         /etc/pki/fullchain.pem;
     ssl_certificate_key     /etc/pki/privkey.key;
 
     location / {

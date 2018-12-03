@@ -1,26 +1,33 @@
 # nginx-certified
 
-A kubernetes friendly ssl enabled nginx container, with configurable, auto-renewing let's encrypt certificates. 
-Uses Lego () under the covers as an ACME Client to facilitate generation and renewal of certificates.
-
-# Methodology
-
-nginx-certified will create and renew SSL certificates from the [Let's Encrypt](https://letsencrypt.org/) API
+A kubernetes friendly ssl enabled nginx reverse proxy, with configurable, auto-renewing let's encrypt certificates. 
+Uses [Dehydrated](https://github.com/lukas2511/dehydrated) Under the Covers as a [Let's Encrypt](https://letsencrypt.org/) Client
 
 # Configuration
 
 Configure the following environment variables for you container:
 
 ```bash
-DOMAIN="example.com"
-EMAIL="admin@example.com"
-VAULT_ADDR="http://127.0.0.1:8200"
-VAULT_TOKEN="8118185b-0ec3-42ad-9f3d-cda4c76f4024"
+SUBDOMAIN="www"
+HOSTED_ZONE="example.com"
+DNS_EMAIL="admin@example.com"
+AWS_ACCESS_KEY_ID=""
+AWS_SECRET_ACCESS_KEY=""
 PRODUCTION=1
+PORT=8000
 ```
+
+# Notes:
+
+- Setting PRODUCTION to 0 will use the Let's Encrypt Staging endpoint for testing.
+- The suggested policy for the AWS Credentials is: ```AmazonRoute53FullAccess```
+- You can use any port you like for the reverse proxy component. 
 
 Store the configuration files you wish to deploy in your vault instance, and configure your override.sh file to load them at run time.
 (See example deployment.)
 
 # Deployment
+
+The container deviates from typical container best practices by launching both the nginx process, and a simple helper process that ensures the certificates are renewed and written, and nginx is reloaded when required to keep SSL functioning.
+
 
