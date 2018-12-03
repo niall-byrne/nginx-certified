@@ -1,5 +1,10 @@
 # nginx-certified
 
+Latest Master Build<br>
+[![CircleCI](https://circleci.com/gh/niall-byrne/nginx-certified/tree/master.svg?style=svg)](https://circleci.com/gh/niall-byrne/goog-playcounts/tree/master)
+
+<br>
+
 A kubernetes friendly ssl enabled nginx reverse proxy, with configurable, auto-renewing let's encrypt certificates. 
 Uses [Dehydrated](https://github.com/lukas2511/dehydrated) Under the Covers as a [Let's Encrypt](https://letsencrypt.org/) Client
 
@@ -8,14 +13,46 @@ Uses [Dehydrated](https://github.com/lukas2511/dehydrated) Under the Covers as a
 Configure the following environment variables for you container:
 
 ```bash
-SUBDOMAIN="www"
-HOSTED_ZONE="example.com"
-DNS_EMAIL="admin@example.com"
-AWS_ACCESS_KEY_ID=""
-AWS_SECRET_ACCESS_KEY=""
-PRODUCTION=1
-PORT=8000
+SUBDOMAIN=test
+HOSTED_ZONE=niallbyrne.ca
+PRODUCTION=0
+DNS_EMAIL=niall@niallbyrne.ca
+AWS_ACCESS_KEY_ID=some_secret_value
+AWS_SECRET_ACCESS_KEY=some_really_secret_value
 ```
+
+This can be done with an env var, or with kubernetes secrets.
+
+```bash
+kubectl create secret generic aws --from-literal=access_key=REDACTED --from-literal=secret_key=REDACTED
+```
+
+```yaml
+env:
+- name: "SUBDOMAIN"
+  value: "playcounts1"
+- name: "HOSTED_ZONE"
+  value: "niallbyrne.ca"
+- name: "DNS_EMAIL"
+  value: "niall@niallbyrne.ca"
+- name: "PRODUCTION"
+  value: "1"
+- name: "TERM"
+  value: "xterm"
+- name: "AWS_ACCESS_KEY_ID"
+  valueFrom:
+    secretKeyRef:
+      name: aws
+      key: access_key
+- name: "AWS_SECRET_ACCESS_KEY"
+    valueFrom:
+      secretKeyRef:
+        name: aws
+        key: secret_key
+```
+
+
+
 
 # Notes:
 
