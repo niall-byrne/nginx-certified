@@ -60,8 +60,6 @@ env:
 - The suggested policy for the AWS Credentials is: ```AmazonRoute53FullAccess```
 - You can use any port you like for the reverse proxy component. 
 
-Store the configuration files you wish to deploy in your vault instance, and configure your override.sh file to load them at run time.
-(See example deployment.)
 
 # Deployment
 

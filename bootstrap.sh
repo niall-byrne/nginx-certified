@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # -----------------------------------------------------------
-# Deyhydrated - integrated with Vault for secret storage
+# nginx-certified - An automated Let's Encrypt integrated reverse proxy
 # Maintained by:  niall@sharedvisionsolutions.com
 # -----------------------------------------------------------
 
@@ -31,6 +31,8 @@ error() {
 [[ -z ${AWS_ACCESS_KEY_ID} ]] && error AWS_ACCESS_KEY_ID
 [[ -z ${AWS_SECRET_ACCESS_KEY} ]] && error AWS_SECRET_ACCESS_KEY
 
+MAX_RETRIES=4
+
 PRODUCTION_ENVIRONMENT=${PRODUCTION:-0}
 PORT="${PROXY_PORT:-8000}"
 
@@ -42,6 +44,8 @@ rm /etc/nginx/sites-enabled/default.conf.bak
 
 echo "BOOTSTRAP: Let's Encrypt Endpoint set to ${DEHYDRATED_CA} ..."
 echo "BOOTSTRAP: Proxying to 127.0.0.1:${PORT} ..."
+
+RETRIES=${MAX_RETRIES}
 
 # -----------------------------------------------------------
 # Functions
@@ -57,8 +61,6 @@ wait_for_backend() {
     done
     echo "BOOTSTRAP: Backend is ready."
 }
-
-RETRIES=4
 
 register() {
 
@@ -136,8 +138,10 @@ main() {
     echo "* Booting Dehydrated Container ...*"
     echo "*****************************************"
 
-    # Ensure Vault Up
+    # Ensure the Backend is Up
     wait_for_backend
+
+    RETRIES=${MAX_RETRIES}
 
     register
     renew
@@ -150,7 +154,7 @@ main() {
         echo "Sleeping for 7 days, until cron is ready ..."
 
         sleep 7d
-        register
+        RETRIES=${MAX_RETRIES}
         renew
 
     done
