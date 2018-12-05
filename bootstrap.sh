@@ -103,7 +103,7 @@ renew() {
     else
 
         echo "*****************************************"
-        echo "* Renewing certificates ...             *"
+        echo "* Calling Let's Encrypt API ...         *"
         echo "*****************************************"
 
         # Generate Certificates
@@ -135,7 +135,7 @@ renew() {
 main() {
 
     echo "*****************************************"
-    echo "* Booting Dehydrated Container ...*"
+    echo "* Booting Container ...                 *"
     echo "*****************************************"
 
     # Ensure the Backend is Up
