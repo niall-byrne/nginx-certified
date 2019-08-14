@@ -8,3 +8,12 @@ jobs:
      - run: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
      - run: docker build -f Dockerfile -t niallbyrne/nginx-certified:$CIRCLE_BRANCH .
      - run: docker push niallbyrne/nginx-certified:$CIRCLE_BRANCH
+nightly:
+  triggers:
+    - schedule:
+      cron: "0 0 * * *"
+      filters:
+        branches:
+          only:
+            - master
+            - develop

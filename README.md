@@ -3,6 +3,9 @@
 Latest Master Build<br>
 [![CircleCI](https://circleci.com/gh/niall-byrne/nginx-certified/tree/master.svg?style=svg)](https://circleci.com/gh/niall-byrne/goog-playcounts/tree/master)
 
+Latest Develop Build<br>
+[![CircleCI](https://circleci.com/gh/niall-byrne/nginx-certified/tree/develop.svg?style=svg)](https://circleci.com/gh/niall-byrne/nginx-certified/tree/develop)
+
 <br>
 
 A kubernetes friendly ssl enabled nginx reverse proxy, with configurable, auto-renewing let's encrypt certificates. 
