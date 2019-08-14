@@ -3,7 +3,7 @@ MAINTAINER Niall Byrne <niall@sharedvisionsolutions.com>
 
 # Begin Image Customization
 
-ARG DEHYDRATED_VERSION="v0.6.2"
+ARG DEHYDRATED_VERSION="v0.6.5"
 ARG USER_UID="501"
 ARG PROXY_PORT="8000"
 
