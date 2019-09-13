@@ -16,12 +16,14 @@ Uses [Dehydrated](https://github.com/lukas2511/dehydrated) Under the Covers as a
 Configure the following environment variables for you container:
 
 ```bash
-SUBDOMAIN=test
-HOSTED_ZONE=niallbyrne.ca
-PRODUCTION=0
-DNS_EMAIL=niall@niallbyrne.ca
 AWS_ACCESS_KEY_ID=some_secret_value
 AWS_SECRET_ACCESS_KEY=some_really_secret_value
+DNS_EMAIL=niall@niallbyrne.ca
+HOSTED_ZONE=niallbyrne.ca
+SUBDOMAIN=test
+PRODUCTION=0
+PROXY_HOST=locahost
+PROXY_PORT=8000
 ```
 
 This can be done with an env var, or with kubernetes secrets.
